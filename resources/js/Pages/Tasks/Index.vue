@@ -1,5 +1,6 @@
 <script setup>
 import { Link, router } from '@inertiajs/vue3';
+import Navbar from '../../Components/Navbar.vue';
 
 defineProps({
     tasks: {
@@ -17,6 +18,7 @@ function deleteTask(id) {
 </script>
 
 <template>
+    <Navbar />
     <div class="max-w-5xl mx-auto px-4 py-8">
         <!-- Header -->
         <div class="mb-8 flex justify-between">

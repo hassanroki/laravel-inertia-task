@@ -53,26 +53,18 @@ function submit() {
                     </span>
                 </div>
 
- <!-- Remember Me -->
- <div class="flex items-center justify-between">
-            <label class="flex items-center gap-3 cursor-pointer select-none">
-                <input
-                    v-model="form.remember"
-                    type="checkbox"
-                    name="remember"
-                    class="w-4 h-4 rounded border-gray-300 text-blue-600
-                           focus:ring-blue-500"
-                >
-                <span class="text-sm text-gray-600">Remember me</span>
-            </label>
+                <!-- Remember Me -->
+                <div class="flex items-center justify-between">
+                    <label class="flex items-center gap-3 cursor-pointer select-none">
+                        <input v-model="form.remember" type="checkbox" name="remember" class="w-4 h-4 rounded border-gray-300 text-blue-600
+                           focus:ring-blue-500">
+                        <span class="text-sm text-gray-600">Remember me</span>
+                    </label>
 
-            <Link
-                href="/register"
-                class="text-sm font-medium text-blue-600 hover:text-blue-700"
-            >
-                Register Here?
-            </Link>
-        </div>
+                    <Link href="/forgot-password" class="text-sm font-medium text-blue-600 hover:text-blue-700">
+                        Forgot Password?
+                    </Link>
+                </div>
 
                 <!-- Submit Button -->
                 <button type="submit" :disabled="form.processing" class="w-full flex items-center justify-center gap-2
@@ -90,7 +82,16 @@ function submit() {
                     {{ form.processing ? 'Logging in...' : 'Log In' }}
                 </button>
             </form>
+
+            <div class="mt-6 text-center">
+                <Link href="/register" class="text-sm font-medium text-blue-600 hover:text-blue-700 transition">
+                    ← Sing Up
+                </Link>
+            </div>
+
         </div>
+
     </div>
+
 </template>
 <style scoped></style>

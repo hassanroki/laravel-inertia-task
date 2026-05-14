@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OtpVerificationMail;
+use App\Models\EmailOtp;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
 
 class AuthController extends Controller
@@ -36,7 +39,24 @@ class AuthController extends Controller
         // When Register Success go to dashboard just one line code
         Auth::login($user);
 
-        return redirect()->route('task.index')->with('success', 'Account create successfully.');
+        // Otp start
+        // Generate 6 digit random code
+        $otp = str_pad(random_int(0, 999999), 6, '0', STR_PAD_LEFT);
+
+        // save otp to database
+        EmailOtp::create([
+            'user_id' => $user->id,
+            'otp' => $otp,
+            'expires_at' => now()->addMinutes(10), // 10 minutes
+        ]);
+
+        // sent the email
+        Mail::to($user->email)->send(
+            new OtpVerificationMail($otp, $user->name)
+        );
+        // Otp End
+
+        return redirect()->route('verify.notice')->with('success', 'Account created! Please check your email for the verification code.');
     }
 
     // Login Show

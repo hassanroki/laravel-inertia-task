@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\TaskController;
@@ -23,6 +24,11 @@ Route::get('/reset-password/{token}', [PasswordResetController::class, 'showRese
 Route::post('/reset-password', [PasswordResetController::class, 'resetPassword'])->name('password.update');
 
 Route::middleware('auth')->group(function () {
+    // Email Verification
+    Route::get('/verify-email', [EmailVerificationController::class, 'show'])->name('verify.notice');
+    Route::post('/verify-email', [EmailVerificationController::class, 'verify'])->name('verify.account');
+    Route::post('/verify-email/resend', [EmailVerificationController::class, 'sentOtp'])->name('send.otp');
+
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
     // Tasks

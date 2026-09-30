@@ -1,58 +1,71 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Task Management System (Laravel + Inertia.js + Vue.js)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A full-stack Task Management application featuring authentication, email verification, password reset capabilities, and a complete Task CRUD system. Built with Laravel, Vue 3, Inertia.js, and Tailwind CSS.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🛠 Tech Stack & Versions
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **PHP:** `^8.3`
+- **Laravel Framework:** `^13.0`
+- **Inertia.js (Laravel Adapter):** `^3.0`
+- **Inertia.js (Vue 3 Adapter):** `^3.0.3`
+- **Vue.js:** `^3.5.33`
+- **Tailwind CSS:** `^4.0.0`
+- **Vite:** `^8.0.0`
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 📋 System Requirements
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Ensure your local development environment meets the following requirements:
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **PHP:** `^8.3` or higher
+- **Composer:** `^2.0`
+- **Node.js:** `^18.0` or higher
+- **npm** or **pnpm / yarn**
+- **Database:** MySQL / SQLite / PostgreSQL
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+---
 
-## Agentic Development
+## 📥 Git Clone & Installation Guide
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
+### 1. Clone the Repository
 ```bash
-composer require laravel/boost --dev
+git clone [https://github.com/hassanroki/laravel-inertia-task.git](https://github.com/hassanroki/laravel-inertia-task.git)
+cd laravel-inertia-task
 
-php artisan boost:install
-```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+📂 Project Architecture & Route Map
+Below is an overview of the key endpoints and functionality built into the project:
 
-## Contributing
+1. Public Pages
+GET / → Home Page (PageController@homePage)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+GET /about → About Page (PageController@aboutPage)
 
-## Code of Conduct
+2. Authentication & Account Management
+GET /register & POST /register → User registration form and submission (AuthController)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+GET /login & POST /login → User login form and authentication (AuthController)
 
-## Security Vulnerabilities
+POST /logout → User logout action (AuthController)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+3. Password Reset Flow
+GET /forgot-password & POST /forgot-password → Request password reset link (PasswordResetController)
 
-## License
+GET /reset-password/{token} & POST /reset-password → Reset password form and update (PasswordResetController)
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+4. Email Verification (auth Middleware)
+GET /verify-email & POST /verify-email → Email verification prompt and verification process (EmailVerificationController)
+
+POST /verify-email/resend → Resend verification OTP (EmailVerificationController)
+
+5. Task CRUD Management (auth Middleware)
+GET /tasks → Display user tasks list (TaskController@index)
+
+GET /tasks/create & POST /tasks/store → Create new task (TaskController@create, TaskController@store)
+
+GET /tasks/{task}/edit & PUT /tasks/{task} → Edit existing task (TaskController@edit, TaskController@update)
+
+DELETE /tasks/{task}/delete → Delete a task (TaskController@destroy)
